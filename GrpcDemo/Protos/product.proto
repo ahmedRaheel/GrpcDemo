@@ -1,0 +1,33 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "GrpcDemo";
+import "google/protobuf/empty.proto";
+
+package  Product;
+
+message Product 
+{
+	 int32 id = 1;
+	 string name = 2;
+	 string description = 3;
+	 int32 amount = 4;
+};
+
+message GetProductByIdRequest {
+	int32 Id = 1;
+};
+
+message CreateProductRequest {
+	 string name = 1;
+	 string description = 2;
+	 int32 amount = 3;
+};
+
+message ProductList {
+ repeated Product products = 1;
+};
+service ProductService {
+   rpc GetProductById(GetProductByIdRequest) returns (Product);
+   rpc CreateProduct(CreateProductRequest) returns (Product);
+   rpc GetProducts (google.protobuf.Empty) returns (ProductList);
+};
